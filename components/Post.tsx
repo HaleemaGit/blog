@@ -2,6 +2,10 @@ import React from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/router";
+import Edit from "../services/editPost";
 
 export type PostProps = {
   id: string;
@@ -12,30 +16,55 @@ export type PostProps = {
   } | null;
   content: string;
   published: boolean;
-  description:string;
+  description: string;
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
-  console.log(post)
+  const router = useRouter();
+
+  const onDelete = async (data: any) => {
+    let toastId;
+    toastId = toast.loading("Deleting post....");
+    try {
+      await axios.delete("/api/post", { data: { data } });
+      toast.success("Successfully deleted ", { id: toastId });
+    } catch (error) {
+      toast.error("Unable to submit your new post", { id: toastId });
+    }
+    router.push("");
+  };
+
+  console.log(post);
   // const authorName = post.author ? post.author.name : "Unknown author";
   return (
-    <Link href={`/p/${post.id}`}>
-      <div>
-      <h2>{post.title}</h2>
-      {/* <small>By {authorName}</small> */}
-      <ReactMarkdown children={post.description} />
-      <button type="button" className="btn btn-danger mr-1">
-          Delete
-        </button>
+    <div>
+      <Link href={`/p/${post.id}`}>
+        <div>
+          <h2>{post.title}</h2>
+          {/* <small>By {authorName}</small> */}
+          <ReactMarkdown children={post.description} />
+        </div>
+      </Link>
+      <Edit post={post} />
+      <button type="button" className="edit btn btn-danger mr-1">
+        Edit
+      </button>
+      <button
+        type="button"
+        className="delete btn btn-danger mr-1"
+        onClick={() => {
+          onDelete(post);
+        }}
+      >
+        Delete
+      </button>
       <style jsx>{`
         div {
           color: inherit;
           padding: 2rem;
         }
       `}</style>
-      </div>
-     
-    </Link>
+    </div>
   );
 };
 

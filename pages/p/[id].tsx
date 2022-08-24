@@ -4,19 +4,17 @@ import ReactMarkdown from "react-markdown"
 import Layout from "../../components/Layout"
 import { PostProps } from "../../components/Post"
 import { PrismaClient } from "@prisma/client";
-import { getPost } from "../../services/post";
 
 
 const prisma = new PrismaClient();
 
-
-
 // export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-//   const post = await getPost(String(params?.id));
-//   return {
-//     props: post,
-//   };
-// };
+//   const updatePost= await prisma.post.update({
+//   where: {
+//     id: String(params?.id),
+//   },
+// })
+
 
 
 // async function deletePost(id: string): Promise<void> {
@@ -33,26 +31,18 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       id: String(params?.id),
     },
    });
-  //   id: "1",
-  //   title: "Prisma is the perfect ORM for Next.js",
-  //   content: "[Prisma](https://github.com/prisma/prisma) and Next.js go _great_ together!",
-  //   published: false,
-  //   author: {
-  //     name: "Nikolas Burk",
-  //     email: "burk@prisma.io",
-  //   },
-  // }
   return {
     props:{
       post:JSON.parse(JSON.stringify(post)),
     } 
   }
+ 
 }
 
 
 
 const Post: React.FC<PostProps> = (props) => {
-  let title = props.title
+  let title = props.post.title
   if (!props.published) {
     title = `${title} (Draft)`
   }
@@ -62,7 +52,7 @@ const Post: React.FC<PostProps> = (props) => {
       <div>
         <h2>{title}</h2>
         {/* <p>By {props?.author?.name || "Unknown author"}</p> */}
-        <ReactMarkdown children={props.description} />
+        <ReactMarkdown children={props.post.description} />
       </div>
       <style jsx>{`
         .page {
