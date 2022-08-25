@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import { getPosts} from "../services/post";
 import BlogForm from "../services/blogForm";
+import Demo from "../components/Demo"
 
 type Props = {
   data: PostProps[]
@@ -25,11 +26,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Blog: React.FC<Props> = (props:any) => {
   console.log("props", props.data)
-//  if({Error}){
+//  if({error}){
 //    return <h1>Error retrieving post</h1>
 //  }
   return (
     <Layout>
+      <Demo />
       <div className="page">
         <h1>Public Feed</h1>
         <main>

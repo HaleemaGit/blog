@@ -8,23 +8,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-//   const updatePost= await prisma.post.update({
-//   where: {
-//     id: String(params?.id),
-//   },
-// })
-
-
-
-// async function deletePost(id: string): Promise<void> {
-//   await fetch(`/api/post/${id}`, {
-//     method: "DELETE",
-//   });
-//   await Router.push("/")
-// }
-
-
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
    const post =  await prisma.post.findUnique({
     where: {
@@ -38,8 +21,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
  
 }
-
-
 
 const Post: React.FC<PostProps> = (props) => {
   let title = props.post.title

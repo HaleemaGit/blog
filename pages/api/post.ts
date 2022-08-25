@@ -31,12 +31,6 @@ export default async function handler(
     }
   }
 
-  // else {
-  //   res.setHeader("Allow", ["POST"]);
-  //   res.status(405).json({ message: `HTTP method ${req.method} is not supported.` });
-  // }
-
-
  
 if (req.method === 'PATCH') {
   try {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
@@ -29,7 +29,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
       await axios.delete("/api/post", { data: { data } });
       toast.success("Successfully deleted ", { id: toastId });
     } catch (error) {
-      toast.error("Unable to submit your new post", { id: toastId });
+      toast.error("Unable to delete your new post", { id: toastId });
     }
     router.push("");
   };
