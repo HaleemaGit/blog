@@ -4,7 +4,7 @@ import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import { getPosts} from "../services/post";
 import BlogForm from "../services/blogForm";
-import Demo from "../components/Demo"
+import Login from "../components/Login";
 
 type Props = {
   data: PostProps[]
@@ -31,7 +31,7 @@ const Blog: React.FC<Props> = (props:any) => {
 //  }
   return (
     <Layout>
-      <Demo />
+      <Login />
       <div className="page">
         <h1>Public Feed</h1>
         <main>
