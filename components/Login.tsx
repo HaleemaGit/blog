@@ -3,7 +3,7 @@ import * as Icon from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from "next/image";
 
@@ -29,7 +29,9 @@ const schema = Yup.object().shape({
     ),
 });
 
-function Login() {
+function Login({showModal, setShowModal}:any) {
+
+
   const { data: session, status } = useSession();
   const user = session?.user;
   const nameArray = user?.name?.split(" ");
@@ -47,14 +49,22 @@ function Login() {
     console.log("clicked");
   }; // your form submit function which will invoke after successful validation
 
+  const hideModal = () => {
+    setShowModal(false);
+  };
+  
 
   return (
-    <div>
+
+      <Modal show={showModal} onHide={hideModal}>
+        <Modal.Body>
+      <div>
       <div className="popup-tabs-container">
+        <button onClick={hideModal}>close</button>
         <div className="popup-tab-content" id="login">
           <form onSubmit={handleSubmit(onSubmit)} id="login-account-form">
             <div className="d-flex flex-row align-items-center mb-4 px-5 ml-1 mt-2">
-              <Icon.Envelope size={30} className="px-2 mb-2 mt-3" />
+              {/* <Icon.Envelope size={30} className="px-2 mb-2 mt-3" /> */}
               <div className="form-outline flex-fill mb-2 mt-3">
                 <input
                   type="email"
@@ -75,7 +85,7 @@ function Login() {
             </div>
 
             <div className="d-flex flex-row align-items-center mb-4 px-5 ml-1">
-              <Icon.LockFill size={30} className="px-2 mb-2 mt-2" />
+              {/* <Icon.LockFill size={30} className="px-2 mb-2 mt-2" /> */}
               <div className="form-outline flex-fill mb-2 mt-2">
                 <input
                   type="password"
@@ -135,6 +145,8 @@ function Login() {
         )
       }
     </div>
+    </Modal.Body>
+    </Modal>
   );
 }
 

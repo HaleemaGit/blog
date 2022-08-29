@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { GetStaticProps } from "next"
 import Layout from "../components/Layout"
 import Post, { PostProps } from "../components/Post"
 import { getPosts} from "../services/post";
 import BlogForm from "../services/blogForm";
 import Login from "../components/Login";
+import { Button } from "react-bootstrap";
 
 type Props = {
   data: PostProps[]
@@ -25,13 +26,19 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 const Blog: React.FC<Props> = (props:any) => {
+  const[showModal, setShowModal] = useState(false);
+
+  const OnLogin = () => {
+    setShowModal(true);
+  };
   console.log("props", props.data)
 //  if({error}){
 //    return <h1>Error retrieving post</h1>
 //  }
   return (
     <Layout>
-      <Login />
+      <Button onClick={OnLogin}>Login Here</Button>
+      <Login  showModal={showModal} setShowModal={setShowModal} />
       <div className="page">
         <h1>Public Feed</h1>
         <main>
@@ -64,4 +71,8 @@ const Blog: React.FC<Props> = (props:any) => {
 
 export default Blog
 
+
+// function setShowModal(arg0: boolean) {
+//   throw new Error("Function not implemented.");
+// }
 
