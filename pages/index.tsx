@@ -26,19 +26,21 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
 const Blog: React.FC<Props> = (props:any) => {
-  const[showModal, setShowModal] = useState(false);
+// const[showModal, setShowModal] = useState(false);
 
-  const OnLogin = () => {
-    setShowModal(true);
-  };
+
+
+  // const OnLogin = () => {
+  //   setShow(true);
+  // };
   console.log("props", props.data)
 //  if({error}){
 //    return <h1>Error retrieving post</h1>
 //  }
   return (
     <Layout>
-      <Button onClick={OnLogin}>Login Here</Button>
-      <Login  showModal={showModal} setShowModal={setShowModal} />
+      {/* <Button onClick={OnLogin}>Login Here</Button> */}
+      <Login />
       <div className="page">
         <h1>Public Feed</h1>
         <main>
