@@ -37,6 +37,7 @@ export default function Edit(props: any) {
       await axios.patch("/api/post", data);
       toast.success("Successfully edited", { id: toastId });
       reset();
+      props.setEditing(false);
     } catch (error) {
       toast.error("Unable to edit your post", { id: toastId });
     }
@@ -50,20 +51,20 @@ export default function Edit(props: any) {
       </form> */}
 
       {/* {showEditForm && ( */}
-        <form onSubmit={handleSubmit(onEdit)}>
-          <label>Title</label>
-          <input {...register("title")} />
-          <label>Description</label>
-          <input {...register("description")} />
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary mr-1">
-              Save Changes
-            </button>
-            {/* <button type="button" onClick={() => reset()} className="btn btn-secondary">
+      <form onSubmit={handleSubmit(onEdit)}>
+        <label>Title</label>
+        <input {...register("title")} />
+        <label>Description</label>
+        <input {...register("description")} />
+        <div className="form-group">
+          <button type="submit" className="btn btn-primary mr-1">
+            Save Changes
+          </button>
+          {/* <button type="button" onClick={() => reset()} className="btn btn-secondary">
       Reset
     </button> */}
-          </div>
-        </form>
+        </div>
+      </form>
       {/* )} */}
     </div>
   );

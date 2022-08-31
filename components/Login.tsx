@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import * as Icon from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import * as Yup from "yup";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-
 
 interface IFormInputs {
   email: string;
@@ -14,10 +14,9 @@ interface IFormInputs {
 }
 interface IUser {
   lastName?: string;
-  firstName?:string;
-  middleName?:string;
+  firstName?: string;
+  middleName?: string;
 }
-
 
 const schema = Yup.object().shape({
   email: Yup.string().required(),
@@ -31,7 +30,6 @@ const schema = Yup.object().shape({
 });
 
 // function Login({showModal, setShowModal}:any) {
-
 
 //   const { data: session, status } = useSession();
 //   const user = session?.user;
@@ -53,7 +51,6 @@ const schema = Yup.object().shape({
 //   const hideModal = () => {
 //     setShowModal(false);
 //   };
-  
 
 //   return (
 
@@ -153,8 +150,6 @@ const schema = Yup.object().shape({
 
 // export default Login;
 
-
-
 // import React, { useState } from 'react';
 // import Button from 'react-bootstrap/Button';
 // import Modal from 'react-bootstrap/Modal';
@@ -165,33 +160,30 @@ function Login() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         Login here
       </Button>
-<div className="styles.ModalContainer">
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <div className="styles.ModalContainer">
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   );
 }
 export default Login;
-
-
 
 // render(<Example />);

@@ -1,19 +1,20 @@
-import React, { useState } from "react"
-import { GetStaticProps } from "next"
-import Layout from "../components/Layout"
-import Post, { PostProps } from "../components/Post"
-import { getPosts} from "../services/post";
+import React, { useState } from "react";
+import { GetStaticProps } from "next";
+import Layout from "../components/Layout";
+import Post, { PostProps } from "../components/Post";
+import { getPosts } from "../services/post";
 import BlogForm from "../services/blogForm";
 import Login from "../components/Login";
 import { Button } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 
 type Props = {
-  data: PostProps[]
-}
+  data: PostProps[];
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-  console.log("We're HERE")
- const data = await getPosts()
+  console.log("We're HERE");
+  const data = await getPosts();
   return {
     props: {
       data: JSON.parse(JSON.stringify(data)),
@@ -22,21 +23,16 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-
-
-
-const Blog: React.FC<Props> = (props:any) => {
-// const[showModal, setShowModal] = useState(false);
-
-
+const Blog: React.FC<Props> = (props: any) => {
+  // const[showModal, setShowModal] = useState(false);
 
   // const OnLogin = () => {
   //   setShow(true);
   // };
-  console.log("props", props.data)
-//  if({error}){
-//    return <h1>Error retrieving post</h1>
-//  }
+  console.log("props", props.data);
+  //  if({error}){
+  //    return <h1>Error retrieving post</h1>
+  //  }
   return (
     <Layout>
       {/* <Button onClick={OnLogin}>Login Here</Button> */}
@@ -44,7 +40,7 @@ const Blog: React.FC<Props> = (props:any) => {
       <div className="page">
         <h1>Public Feed</h1>
         <main>
-          {props.data.map((post:any) => (
+          {props.data.map((post: any) => (
             <div key={post.id} className="post">
               <Post post={post} />
             </div>
@@ -67,14 +63,11 @@ const Blog: React.FC<Props> = (props:any) => {
         }
       `}</style>
     </Layout>
-    
-  )
-}
+  );
+};
 
-export default Blog
-
+export default Blog;
 
 // function setShowModal(arg0: boolean) {
 //   throw new Error("Function not implemented.");
 // }
-

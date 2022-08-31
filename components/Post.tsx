@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Router from "next/router";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
@@ -20,6 +20,8 @@ export type PostProps = {
 };
 
 const Post: React.FC<{ post: PostProps }> = ({ post }) => {
+  const [editing, setEditing] = useState(false);
+
   const router = useRouter();
 
   const onDelete = async (data: any) => {
@@ -41,14 +43,21 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
       <Link href={`/p/${post.id}`}>
         <div>
           <h2>{post.title}</h2>
-          {/* <small>By {authorName}</small> */}
           <ReactMarkdown children={post.description} />
         </div>
       </Link>
-      <Edit post={post} />
-      <button type="button" className="edit btn btn-danger mr-1">
-        Edit
-      </button>
+      {editing && <Edit post={post} setEditing={setEditing} />}
+      {!editing && (
+        <button
+          type="button"
+          className="edit btn btn-danger mr-1"
+          onClick={() => {
+            setEditing(true);
+          }}
+        >
+          Edit
+        </button>
+      )}
       <button
         type="button"
         className="delete btn btn-danger mr-1"

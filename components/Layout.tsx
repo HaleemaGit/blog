@@ -1,5 +1,7 @@
 import React, { ReactNode } from "react";
 import Header from "./Header";
+import Modal from "react-bootstrap/Modal";
+import { Button } from "react-bootstrap";
 
 type Props = {
   children: ReactNode;
