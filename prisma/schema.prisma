@@ -65,6 +65,8 @@ model User {
   updatedAt     DateTime  @updatedAt
   posts         Post[]
   sessions      Session[]
+  password      String?
+  options       String?     
 }
 
 model VerificationRequest {

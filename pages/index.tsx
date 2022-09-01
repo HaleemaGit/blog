@@ -4,9 +4,9 @@ import Layout from "../components/Layout";
 import Post, { PostProps } from "../components/Post";
 import { getPosts } from "../services/post";
 import BlogForm from "../services/blogForm";
-import Login from "../components/Login";
-import { Button } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
+// import Login from "../components/Login";
+import Man from "../components/man";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 type Props = {
   data: PostProps[];
@@ -35,8 +35,9 @@ const Blog: React.FC<Props> = (props: any) => {
   //  }
   return (
     <Layout>
+      <Man />
       {/* <Button onClick={OnLogin}>Login Here</Button> */}
-      <Login />
+      {/* <Login /> */}
       <div className="page">
         <h1>Public Feed</h1>
         <main>
