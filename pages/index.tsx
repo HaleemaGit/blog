@@ -5,8 +5,11 @@ import Post, { PostProps } from "../components/Post";
 import { getPosts } from "../services/post";
 import BlogForm from "../services/blogForm";
 // import Login from "../components/Login";
-import Man from "../components/man";
+import NavBar from "../components/NavBar";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { useSession, signOut } from "next-auth/react";
+import * as Icon from "react-bootstrap-icons";
+
 
 type Props = {
   data: PostProps[];
@@ -24,21 +27,20 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Blog: React.FC<Props> = (props: any) => {
-  // const[showModal, setShowModal] = useState(false);
 
-  // const OnLogin = () => {
-  //   setShow(true);
-  // };
+  const { data: session, status } = useSession();
+  console.log("session", session);
+
+  const user = session?.user;
+  const isLoadingUser = status === "loading";
+  
   console.log("props", props.data);
   //  if({error}){
   //    return <h1>Error retrieving post</h1>
   //  }
   return (
     <Layout>
-      <Man />
-      {/* <Button onClick={OnLogin}>Login Here</Button> */}
-      {/* <Login /> */}
-      <div className="page">
+       <div className="page">
         <h1>Public Feed</h1>
         <main>
           {props.data.map((post: any) => (
@@ -48,6 +50,19 @@ const Blog: React.FC<Props> = (props: any) => {
           ))}
         </main>
       </div>
+      {user ? 
+        (
+          <div>
+            <p>{user?.email}</p>
+            <div>{user?.image}</div>
+            <button onClick={() => signOut()} className="btn mb-3 mt-2 border border-secondary">
+              <Icon.Google size={30} color={"red"} className="px-2 mb-3 mt-2" />
+              signOut
+            </button>
+          </div>
+        ):(
+      
+          <NavBar />)}
       <BlogForm />
       <style jsx>{`
         .post {

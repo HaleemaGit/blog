@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Popup from "./popup";
 import Button from "react-bootstrap/Button";
 
-function Man() {
+function NavBar() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -67,4 +67,4 @@ function Man() {
   );
 }
 
-export default Man;
+export default NavBar;
