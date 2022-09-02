@@ -50,7 +50,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
       {!editing && (
         <button
           type="button"
-          className="edit btn btn-danger mr-1"
+          className="edit btn btn-info mr-1"
           onClick={() => {
             setEditing(true);
           }}
@@ -60,7 +60,7 @@ const Post: React.FC<{ post: PostProps }> = ({ post }) => {
       )}
       <button
         type="button"
-        className="delete btn btn-danger mr-1"
+        className="delete btn btn-secondary mr-1"
         onClick={() => {
           onDelete(post);
         }}
