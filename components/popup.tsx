@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Login from "./login";
+import Login from "./Login";
 import Register from "./register";
 import Modal from "react-bootstrap/Modal";
 
